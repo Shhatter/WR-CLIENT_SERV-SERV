@@ -7,13 +7,23 @@ import java.nio.Buffer;
 
 enum pawnColor
 {
-    RED,WHITE
+    RED,WHITE;
+
+
+
 
 }
+enum playerSide
+{
+    TOP,BOTTOM
+}
+
+
 
 public class Main {
 
     public static void main(String[] args) {
+
 
 
         try
@@ -35,6 +45,7 @@ public class Main {
 
             System.out.println("Server has completed the work");
         }
+
 
 }
 
