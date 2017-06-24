@@ -1,13 +1,17 @@
 package com.company;
 
 
+import java.util.ArrayList;
+
 public class Pawn {
 
-    pawnColor pColor;
+    PawnColor pColor;
     boolean boardSide;
     String position;
     boolean pawnLocked;
     boolean pawnKing ; // czy pionek jest damką
+
+    ArrayList <PawnMoveOption> moveOption;
 
 
 
