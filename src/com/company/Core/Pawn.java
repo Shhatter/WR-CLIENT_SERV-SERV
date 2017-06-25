@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Core;
 
 
 import com.company.Enums.PawnColor;

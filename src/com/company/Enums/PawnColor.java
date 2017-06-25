@@ -5,7 +5,7 @@ package com.company.Enums;
  */
 public enum PawnColor
 {
-    BLACK,WHITE;
+    BLACK,WHITE,NONE
 
 
 
