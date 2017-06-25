@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Enums;
 
 /**
  * Created by Praca on 2017-06-24.

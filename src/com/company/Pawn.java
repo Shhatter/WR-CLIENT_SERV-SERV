@@ -1,6 +1,8 @@
 package com.company;
 
 
+import com.company.Enums.PawnColor;
+
 import java.util.ArrayList;
 
 public class Pawn {
