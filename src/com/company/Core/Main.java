@@ -3,6 +3,7 @@ package com.company.Core;
 import java.io.*;
 import java.net.BindException;
 import java.net.ServerSocket;
+import java.net.SocketException;
 
 
 public class Main {
@@ -30,6 +31,7 @@ public class Main {
             System.out.println("New connection has been stabilished! Connection number " + gameController.threadNumber);
             if(gameController.threadNumber ==2)
             {
+                gameController.start();
                 gameController.startGame();
                 gameController.gameInProgress();
                 gameController.endGame();
@@ -45,14 +47,22 @@ public class Main {
 */ //smieci
 
     } catch (BindException e)
-    {
+    {   System.out.println("#################################");
         System.out.println("Port reserved by another program");
+        System.out.println("#################################");
+    } catch (SocketException f)
+    {
+
+        System.out.println("---------------------------------");
+        System.out.println("Some client disconnected !!!");
+        System.out.println("---------------------------------");
+
     } catch (IOException e) {
         e.printStackTrace();
     } finally
     {
 
-        System.out.println("Server has completed the work");
+        System.out.println("Server has completed the work!");
     }
 
 

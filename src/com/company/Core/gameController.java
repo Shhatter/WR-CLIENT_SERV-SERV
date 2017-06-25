@@ -9,7 +9,8 @@ public class gameController extends Thread
 {
     public  boolean portListening = true;
     public  int threadNumber = 0;
-
+    private Thread thread;
+    private String threadName;
 
 
     public String ip; // unused - localhost for now
@@ -42,6 +43,6 @@ public class gameController extends Thread
     public void run()
     {
 
-
+        System.out.println("Lubie placki!!!!!!!!!!!!!");
     }
 }

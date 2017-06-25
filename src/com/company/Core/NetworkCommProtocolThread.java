@@ -74,7 +74,7 @@ public class NetworkCommProtocolThread extends Thread{
             }
                 else
             {
-                System.out.println("Not enough players !");
+                //System.out.println("Not enough players !");
             }
 
 
