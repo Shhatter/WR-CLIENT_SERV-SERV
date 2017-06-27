@@ -28,15 +28,19 @@ public class NetworkCommProtocolThread extends Thread{
 
 
 
-    public void sendData(MoveTransferOrder order) throws Exception
+    public void sendData(MoveTransferOrder sOrder)
     {
-        //out.writeObject(data);
+       // out.writeObject(data);
     }
+    public void sendData(MoveTransferOrder fillBoard, PlayerSide playerSide, PawnColor pawnColor, boolean allowedToMove)
+    {
+        moveTransfer.setColor(pawnColor);
+        moveTransfer.setRightToMove(allowedToMove);
+        moveTransfer.setOrder(fillBoard);
 
 
 
-
-
+    }
 
 /*    public Consumer<Serializable> getData() throws Exception
     {
@@ -56,8 +60,7 @@ public class NetworkCommProtocolThread extends Thread{
     {
 
         currentThreadID = Thread.currentThread().getId();
-        System.out.println("Thread ID: "+currentThreadID );
-        System.out.println("Dziala watek Klienta");
+        System.out.print("Thread ID: "+currentThreadID + "has started the work");
 
         try {
 
@@ -69,8 +72,11 @@ public class NetworkCommProtocolThread extends Thread{
             socket.close();*/
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
-            this.socket = socket;
-            this.out = out;
+
+
+
+
+
 
 //            socket.setTcpNoDelay(true); może się przyda - może nie.
 
@@ -120,4 +126,6 @@ public class NetworkCommProtocolThread extends Thread{
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
+
+
 }

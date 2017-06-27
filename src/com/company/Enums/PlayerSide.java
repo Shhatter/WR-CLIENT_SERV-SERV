@@ -5,5 +5,5 @@ package com.company.Enums;
  */
 public enum PlayerSide
 {
-    TOP,BOTTOM
+    TOP,BOTTOM,NOT_DECITED
 }

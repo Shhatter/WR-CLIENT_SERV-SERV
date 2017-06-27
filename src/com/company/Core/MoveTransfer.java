@@ -1,6 +1,8 @@
 package com.company.Core;
 
+import com.company.Enums.MoveTransferOrder;
 import com.company.Enums.PawnColor;
+import com.company.Enums.PlayerSide;
 
 import java.io.Serializable;
 
@@ -13,10 +15,12 @@ public class MoveTransfer implements Serializable
     int nStart,mStart,nDestination,mDestination;
     PawnColor color;
     String ownerID;
-    String order;
+    MoveTransferOrder order;
     boolean rightToMove;
+    PlayerSide playerSide;
 
-    public MoveTransfer(int nStart, int mStart,int nDestination,int mDestination, PawnColor color, String ownerID,String order,boolean rightToMove)
+
+    public MoveTransfer(int nStart, int mStart,int nDestination,int mDestination, PawnColor color, String ownerID,MoveTransferOrder order,boolean rightToMove,PlayerSide playerSide)
 
     {
         this.nDestination = nDestination;
@@ -27,6 +31,7 @@ public class MoveTransfer implements Serializable
         this.ownerID = ownerID;
         this.order = order;
         this.rightToMove = rightToMove;
+        this.playerSide = playerSide;
     }
 
     public MoveTransfer() //9
@@ -37,19 +42,12 @@ public class MoveTransfer implements Serializable
         this.mStart = 0;
         this.color = PawnColor.NONE;
         this.ownerID = "NONE";
-        this.order = "IDLE";
-        this.rightToMove = true;
+        this.order = MoveTransferOrder.NO_ORDER;
+        this.rightToMove = false;
+        playerSide = PlayerSide.NOT_DECITED;
     }
 
-    public void setAllData(int n, int m, PawnColor color, String ownerID,String order,boolean systemEnabled)
-    {
-        this.nStart = n;
-        this.mStart = m;
-        this.color = color;
-        this.ownerID = ownerID;
-        this.order = order;
-        this.rightToMove = systemEnabled;
-    }
+
     public int getnStart() {
         return nStart;
     }
@@ -98,11 +96,11 @@ public class MoveTransfer implements Serializable
         this.ownerID = ownerID;
     }
 
-    public String getOrder() {
+    public MoveTransferOrder getOrder() {
         return order;
     }
 
-    public void setOrder(String order) {
+    public void setOrder(MoveTransferOrder order) {
         this.order = order;
     }
 

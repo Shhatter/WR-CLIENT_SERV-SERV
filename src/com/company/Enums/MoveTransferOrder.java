@@ -5,5 +5,5 @@ package com.company.Enums;
  */
 public enum MoveTransferOrder {
 
-    FILL_BOARD,
+    FILL_BOARD,NO_ORDER
 }

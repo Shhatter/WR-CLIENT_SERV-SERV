@@ -20,7 +20,7 @@ public class Main {
     {
 
         System.out.println("Server is waiting for the connection attempt to establish... ");
-        while (gameController.portListening) {
+        while (gameController.portListening) { // 127.0.0.1:5555 == localhost
 
 
             gameController.networkConnections.add(new NetworkConnection(server.accept()));

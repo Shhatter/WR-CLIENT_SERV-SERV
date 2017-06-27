@@ -25,7 +25,12 @@ public void startConnection()
     networkCommProtocolThread.start();
 }
 
+public void closeConnection()
+{
 
+
+
+}
 /*
 
     public NetworkConnection(Consumer<Serializable> consumer) {

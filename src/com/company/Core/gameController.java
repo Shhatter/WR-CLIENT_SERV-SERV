@@ -1,5 +1,6 @@
 package com.company.Core;
 
+import com.company.Enums.MoveTransferOrder;
 import com.company.Enums.PawnColor;
 import com.company.Enums.PlayerSide;
 import com.company.Enums.ServerStatus;
@@ -50,7 +51,10 @@ public void start()
             case FILLTHEBOARD:
             {
                 for (int i =0;i<gameSession.length;i++) {
-                    networkConnections.get(gameSession[i]).networkCommProtocolThread.sendData();
+                    networkConnections.get(gameSession[i]).networkCommProtocolThread.sendData(MoveTransferOrder.FILL_BOARD,
+                            networkConnections.get(gameSession[i]).networkCommProtocolThread.playerSide,
+                            networkConnections.get(gameSession[i]).networkCommProtocolThread.pawnColor,
+                            networkConnections.get(gameSession[i]).networkCommProtocolThread.allowedToMove);
                 }
             }
 

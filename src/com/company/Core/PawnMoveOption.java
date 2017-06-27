@@ -6,4 +6,7 @@ package com.company.Core;
 public class PawnMoveOption {
 
 
+
+
+
 }
