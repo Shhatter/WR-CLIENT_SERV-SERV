@@ -19,22 +19,23 @@ public class Main {
     try(ServerSocket server = new ServerSocket(5555))
     {
 
-        System.out.println("Server is waiting for the connection attempt to estabilish... ");
+        System.out.println("Server is waiting for the connection attempt to establish... ");
         while (gameController.portListening) {
 
 
-              gameController.networkConnections.add(new NetworkConnection(server.accept()));
-              gameController.networkConnections.get(gameController.networkConnections.size()-1).startConnection();
-            /*new NetworkCommProtocolThre*///*ad(server.accept(),Integer.toString(gameController.threadNumber)).start();*/
-//            new KKMultiServerThread(serverSocket.accept()).start();
+            gameController.networkConnections.add(new NetworkConnection(server.accept()));
+            gameController.networkConnections.get(gameController.networkConnections.size()-1).startConnection();
+
             gameController.threadNumber++;
-            System.out.println("New connection has been stabilished! Connection number " + gameController.threadNumber);
+            System.out.println("New connection has been established! Connection number " + gameController.threadNumber);
+
             if(gameController.threadNumber ==2)
             {
+
                 gameController.start();
-                gameController.startGame();
-                gameController.gameInProgress();
-                gameController.endGame();
+               // gameController.filltheBoard();
+             //   gameController.gameInProgress();
+             //   gameController.endGame();
 //                gameController.threadNumber = 0; used to flush current game and see if there are any other connections left to play again
             }
 

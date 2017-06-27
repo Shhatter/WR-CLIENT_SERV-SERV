@@ -20,6 +20,8 @@ public class NetworkConnection {
 
 public void startConnection()
 {
+
+
     networkCommProtocolThread.start();
 }
 

@@ -1,5 +1,6 @@
 package com.company.Core;
 
+import com.company.Enums.MoveTransferOrder;
 import com.company.Enums.PawnColor;
 import com.company.Enums.PlayerSide;
 
@@ -14,20 +15,27 @@ public class NetworkCommProtocolThread extends Thread{
 
     PawnColor pawnColor;
     PlayerSide playerSide;
+    public boolean activeSession = false; // check if client is able to start new game
+    public boolean allowedToMove = false;
+
 
     public MoveTransfer moveTransfer= new MoveTransfer();
     public Socket socket = null;
     public ObjectOutputStream out;
     public ObjectInputStream in;
-    public String currentThreadID;
+    long  currentThreadID;
     //public Consumer<Serializable> consumer;
 
 
 
-    public void sendData(Serializable data) throws Exception
+    public void sendData(MoveTransferOrder order) throws Exception
     {
-        out.writeObject(data);
+        //out.writeObject(data);
     }
+
+
+
+
 
 
 /*    public Consumer<Serializable> getData() throws Exception
@@ -46,6 +54,9 @@ public class NetworkCommProtocolThread extends Thread{
 @Override
     public void run()
     {
+
+        currentThreadID = Thread.currentThread().getId();
+        System.out.println("Thread ID: "+currentThreadID );
         System.out.println("Dziala watek Klienta");
 
         try {
@@ -86,7 +97,8 @@ public class NetworkCommProtocolThread extends Thread{
 
 
         }
-//        socket.close();
+//           socket.close();
+
 
         } catch (IOException e)
         {
@@ -96,6 +108,7 @@ public class NetworkCommProtocolThread extends Thread{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }  finally {
+
 
 
         }
