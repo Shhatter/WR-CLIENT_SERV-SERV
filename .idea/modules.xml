@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/WR-CLIENT_SERV-SERV.iml" filepath="$PROJECT_DIR$/WR-CLIENT_SERV-SERV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CHECKERS-CLIENT_SERV-SERVER.iml" filepath="$PROJECT_DIR$/CHECKERS-CLIENT_SERV-SERVER.iml" />
     </modules>
   </component>
 </project>
