@@ -5,6 +5,7 @@ import com.company.Enums.PawnColor;
 import com.company.Enums.PlayerSide;
 
 import java.io.*;
+import java.net.NetworkInterface;
 import java.net.Socket;
 import java.util.function.Consumer;
 
@@ -17,6 +18,8 @@ public class NetworkCommProtocolThread extends Thread{
     PlayerSide playerSide;
     public boolean activeSession = false; // check if client is able to start new game
     public boolean allowedToMove = false;
+    boolean newDataToSend = false;
+    boolean newDataToReceive = false;
 
 
     public MoveTransfer moveTransfer= new MoveTransfer();
@@ -24,9 +27,12 @@ public class NetworkCommProtocolThread extends Thread{
     public ObjectOutputStream out;
     public ObjectInputStream in;
     long  currentThreadID;
-    //public Consumer<Serializable> consumer;
 
-
+    public NetworkCommProtocolThread()
+    {
+        this.setDaemon(true);
+        this.setName("GAME THREAD");
+    }
 
     public void sendData(MoveTransferOrder sOrder)
     {
@@ -37,85 +43,57 @@ public class NetworkCommProtocolThread extends Thread{
         moveTransfer.setColor(pawnColor);
         moveTransfer.setRightToMove(allowedToMove);
         moveTransfer.setOrder(fillBoard);
-
+        newDataToSend = true;
 
 
     }
-
-/*    public Consumer<Serializable> getData() throws Exception
-    {
-        return consumer;
-    }*/
-
-/*    public NetworkCommProtocolThread(Socket socket, String threadNumbner)
-    {
-        super(threadNumbner);
-        this.socket = socket;
-    }*/
-
-
 
 @Override
     public void run()
     {
 
         currentThreadID = Thread.currentThread().getId();
-        System.out.print("Thread ID: "+currentThreadID + "has started the work");
+        System.out.println("Thread ID: "+currentThreadID + " is working");
 
         try {
-
-
-            System.out.println("Dziala try Klienta ");
-
-/*          PrintWriter out = new PrintWriter(socket.getOutputStream()); //output send to the client
-            BufferedReader in = new BufferedReader(new InputStreamReader((socket.getInputStream()))); //input from the client
-            socket.close();*/
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
-
-
-
-
-
+            //socket.setTcpNoDelay(true); //może się przyda - może nie.
 
 //            socket.setTcpNoDelay(true); może się przyda - może nie.
 
-        while (true)
+
+        while (moveTransfer.getOrder()!=MoveTransferOrder.END_OF_GAME)
         {
 
-            if (java.lang.Thread.activeCount()==2)
+            if(newDataToSend == true && newDataToReceive == false && currentThreadID!=0)
             {
+                out.writeObject(moveTransfer);
+                newDataToSend = false;
+                newDataToReceive = true;
+                System.out.println("Data from thread " +currentThreadID + " has been sent");
 
-                System.out.println("We have both players online !");
-                Serializable data = (Serializable) in.readObject();
+
             }
-                else
-            {
-                //System.out.println("Not enough players !");
-            }
+            System.out.println("dum dum ");
 
 
 
-
-//            Serializable data = (Serializable) in.readObject();
-//            consumer.accept(data);
-
-
+        Thread.sleep(100);
 
         }
-//           socket.close();
 
 
         } catch (IOException e)
         {
             e.printStackTrace();
 
-
-        } catch (ClassNotFoundException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
-        }  finally {
+        } finally
+        {
 
-
+            System.out.println("Connection of "+currentThreadID + " has ended");
 
         }
 

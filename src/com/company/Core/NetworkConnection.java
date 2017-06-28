@@ -8,20 +8,21 @@ import java.net.Socket;
 public class NetworkConnection {
 
 
-    public Socket socket;
     public NetworkCommProtocolThread networkCommProtocolThread = new NetworkCommProtocolThread();
 
 
-    public NetworkConnection(Socket socket) {
-        networkCommProtocolThread.setSocket(socket);
+    public NetworkConnection() {
+
+       // networkCommProtocolThread.setSocket(socket);
     }
 
 
 
-public void startConnection()
+public void startConnection(Socket socket )
 {
 
-
+    networkCommProtocolThread.setDaemon(true);
+    networkCommProtocolThread.socket = socket;
     networkCommProtocolThread.start();
 }
 
@@ -31,31 +32,5 @@ public void closeConnection()
 
 
 }
-/*
-
-    public NetworkConnection(Consumer<Serializable> consumer) {
-        this.consumer = consumer;
-        commProtocolThread.setDaemon(true);
-    }
-
-
-    public void startConnection () throws Exception
-    {
-        commProtocolThread.start();
-    }
-
-    public void sendData(Serializable data) throws Exception
-    {
-        commProtocolThread.out.writeObject(data);
-    }
-    public Consumer<Serializable> getData() throws Exception
-    {
-        return consumer;
-    }
-
-
-*/
-
-
 
 }

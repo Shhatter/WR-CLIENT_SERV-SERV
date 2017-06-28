@@ -5,5 +5,5 @@ package com.company.Enums;
  */
 public enum MoveTransferOrder {
 
-    FILL_BOARD,NO_ORDER
+    FILL_BOARD, END_OF_GAME, NO_ORDER
 }

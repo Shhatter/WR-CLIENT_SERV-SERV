@@ -46,6 +46,7 @@ public void start()
 
     public void sendDataToPlayers(ServerStatus serverStatusOrder)
     {
+        System.out.println("Prepare data to send to the clients");
         switch (serverStatusOrder)
         {
             case FILLTHEBOARD:
@@ -56,6 +57,7 @@ public void start()
                             networkConnections.get(gameSession[i]).networkCommProtocolThread.pawnColor,
                             networkConnections.get(gameSession[i]).networkCommProtocolThread.allowedToMove);
                 }
+                break;
             }
 
 
@@ -128,10 +130,17 @@ public void start()
 
 
         }
-        for (int i1 : gameSession) {
-            i1 = -9999;
+
+        if (playersAmount ==0)
+        {
+            for (int i = 0;i<gameSession.length;i++)
+            {
+                gameSession[i] = -9999;
+
+            }
+            System.out.println("Not enough players to play the game ");
         }
-        System.out.println("Not enough players to play the game ");
+
 
     }
 
