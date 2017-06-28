@@ -58,7 +58,7 @@ public class NetworkCommProtocolThread extends Thread{
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
-            //socket.setTcpNoDelay(true); //może się przyda - może nie.
+            socket.setTcpNoDelay(true); //może się przyda - może nie.
 
 //            socket.setTcpNoDelay(true); może się przyda - może nie.
 
@@ -68,14 +68,18 @@ public class NetworkCommProtocolThread extends Thread{
 
             if(newDataToSend == true && newDataToReceive == false && currentThreadID!=0)
             {
+                out.reset();
                 out.writeObject(moveTransfer);
+               // out.writeObject("DUPA");
+
+
+                out.flush();
                 newDataToSend = false;
                 newDataToReceive = true;
                 System.out.println("Data from thread " +currentThreadID + " has been sent");
 
 
             }
-            System.out.println("dum dum ");
 
 
 

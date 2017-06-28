@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by Praca on 2017-06-18.
  */
-public class MoveTransfer implements Serializable
+public class MoveTransfer implements Serializable, Cloneable
 {
 
     int nStart,mStart,nDestination,mDestination;
@@ -47,6 +47,20 @@ public class MoveTransfer implements Serializable
         playerSide = PlayerSide.NOT_DECITED;
     }
 
+    public MoveTransfer(MoveTransfer moveT)
+    {
+
+        this.nDestination = moveT.getnDestination();
+        this.mDestination = moveT.getmDestination();
+        this.nStart = moveT.getnStart();
+        this.mStart = moveT.getmStart();
+        this.color = moveT.getColor();
+        this.ownerID = moveT.getOwnerID();
+        this.order = moveT.getOrder();
+        this.rightToMove = moveT.rightToMove;
+        this.playerSide = moveT.playerSide;
+
+    }
 
     public int getnStart() {
         return nStart;
