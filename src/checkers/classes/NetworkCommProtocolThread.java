@@ -1,13 +1,11 @@
-package com.company.Core;
+package checkers.classes;
 
-import com.company.Enums.MoveTransferOrder;
-import com.company.Enums.PawnColor;
-import com.company.Enums.PlayerSide;
+import checkers.enums.MoveTransferOrder;
+import checkers.enums.PawnColor;
+import checkers.enums.PlayerSide;
 
 import java.io.*;
-import java.net.NetworkInterface;
 import java.net.Socket;
-import java.util.function.Consumer;
 
 /**
  * Created by Praca on 2017-06-18.
@@ -70,6 +68,7 @@ public class NetworkCommProtocolThread extends Thread{
             {
                 out.reset();
                 out.writeObject(moveTransfer);
+
                // out.writeObject("DUPA");
 
 

@@ -1,7 +1,7 @@
-package com.company.Core;
+package checkers.classes;
 
 
-import com.company.Enums.PawnColor;
+import checkers.enums.PawnColor;
 
 import java.util.ArrayList;
 

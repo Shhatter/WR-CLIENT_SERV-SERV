@@ -1,9 +1,9 @@
-package com.company.Core;
+package checkers.classes;
 
-import com.company.Enums.MoveTransferOrder;
-import com.company.Enums.PawnColor;
-import com.company.Enums.PlayerSide;
-import com.company.Enums.ServerStatus;
+import checkers.enums.MoveTransferOrder;
+import checkers.enums.PawnColor;
+import checkers.enums.PlayerSide;
+import checkers.enums.ServerStatus;
 
 import java.util.ArrayList;
 import java.util.Random;

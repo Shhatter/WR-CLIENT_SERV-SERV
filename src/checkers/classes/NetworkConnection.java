@@ -1,8 +1,6 @@
-package com.company.Core;
+package checkers.classes;
 
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class NetworkConnection {

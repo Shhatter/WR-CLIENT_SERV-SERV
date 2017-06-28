@@ -1,4 +1,4 @@
-package com.company.Core;
+package checkers.classes;
 
 import java.io.*;
 import java.net.BindException;

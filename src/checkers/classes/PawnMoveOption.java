@@ -1,4 +1,4 @@
-package com.company.Core;
+package checkers.classes;
 
 /**
  * Created by Praca on 2017-06-18.

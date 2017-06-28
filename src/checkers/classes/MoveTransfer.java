@@ -1,8 +1,8 @@
-package com.company.Core;
+package checkers.classes;
 
-import com.company.Enums.MoveTransferOrder;
-import com.company.Enums.PawnColor;
-import com.company.Enums.PlayerSide;
+import checkers.enums.PawnColor;
+import checkers.enums.MoveTransferOrder;
+import checkers.enums.PlayerSide;
 
 import java.io.Serializable;
 
@@ -61,6 +61,23 @@ public class MoveTransfer implements Serializable, Cloneable
         this.playerSide = moveT.playerSide;
 
     }
+
+    public void showAllData()
+    {
+        System.out.println("***DATA FROM OUTPUTSTREAM***");
+        System.out.println(nDestination);
+        System.out.println(mDestination);
+        System.out.println(nStart);
+        System.out.println(mStart);
+        System.out.println(color);
+        System.out.println(ownerID);
+        System.out.println(order);
+        System.out.println(rightToMove);
+        System.out.println(playerSide);
+        System.out.println("***DATA FROM OUTPUTSTREAM***");
+
+    }
+
 
     public int getnStart() {
         return nStart;
