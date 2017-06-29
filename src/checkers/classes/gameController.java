@@ -15,19 +15,14 @@ public class gameController extends Thread
 {
     public  boolean portListening = true;
     public  int threadNumber = 0;
-    private Thread thread;
-    private String threadName;
     public ServerStatus serverStatus = ServerStatus.INACTIVE;
-
-
     public int port = 5555; // default used port for the test purpose
     public int loggedUsers;
     public Board board;
     public String currentPlayerMove;
-
-    //public String [] commands = {"LOCK_LAYOUT","UNLOCK_LAYOUT","START_YOUR_MOVE","MOVE_ENDED","YOU_WIN","YOU_LOOSE"};
     ArrayList<NetworkConnection> networkConnections = new ArrayList<NetworkConnection>();
-//    ArrayList<int[]> playerSessions = new ArrayList<int[]>(); innitial implementation to support multiple sessions
+
+
     public int [] gameSession = new int[]{-9999,-9999};
 
 public gameController()

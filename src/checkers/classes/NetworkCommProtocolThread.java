@@ -6,6 +6,7 @@ import checkers.enums.PlayerSide;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * Created by Praca on 2017-06-18.
@@ -18,6 +19,7 @@ public class NetworkCommProtocolThread extends Thread{
     public boolean allowedToMove = false;
     boolean newDataToSend = false;
     boolean newDataToReceive = false;
+    public BlockingQueue <MoveTransfer> blockingQueue;
 
 
     public MoveTransfer moveTransfer= new MoveTransfer();
@@ -42,7 +44,6 @@ public class NetworkCommProtocolThread extends Thread{
         moveTransfer.setRightToMove(allowedToMove);
         moveTransfer.setOrder(fillBoard);
         newDataToSend = true;
-
 
     }
 
@@ -79,7 +80,6 @@ public class NetworkCommProtocolThread extends Thread{
 
 
             }
-
 
 
         Thread.sleep(100);

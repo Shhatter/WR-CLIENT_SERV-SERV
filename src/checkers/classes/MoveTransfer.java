@@ -34,19 +34,6 @@ public class MoveTransfer implements Serializable, Cloneable
         this.playerSide = playerSide;
     }
 
-    public MoveTransfer() //9
-    {
-        this.nDestination = 0;
-        this.mDestination = 0;
-        this.nStart = 0;
-        this.mStart = 0;
-        this.color = PawnColor.NONE;
-        this.ownerID = "NONE";
-        this.order = MoveTransferOrder.NO_ORDER;
-        this.rightToMove = false;
-        playerSide = PlayerSide.NOT_DECITED;
-    }
-
     public MoveTransfer(MoveTransfer moveT)
     {
 
@@ -62,6 +49,21 @@ public class MoveTransfer implements Serializable, Cloneable
 
     }
 
+
+    public MoveTransfer() //9
+    {
+        this.nDestination = 0;
+        this.mDestination = 0;
+        this.nStart = 0;
+        this.mStart = 0;
+        this.color = PawnColor.NONE;
+        this.ownerID = "NONE";
+        this.order = MoveTransferOrder.NO_ORDER;
+        this.rightToMove = false;
+        playerSide = PlayerSide.NOT_DECITED;
+    }
+
+
     public void showAllData()
     {
         System.out.println("***DATA FROM OUTPUTSTREAM***");
@@ -74,9 +76,10 @@ public class MoveTransfer implements Serializable, Cloneable
         System.out.println(order);
         System.out.println(rightToMove);
         System.out.println(playerSide);
-        System.out.println("***DATA FROM OUTPUTSTREAM***");
+        System.out.println("********************");
 
     }
+
 
 
     public int getnStart() {
@@ -144,4 +147,48 @@ public class MoveTransfer implements Serializable, Cloneable
     }
 
 
+    public PlayerSide getPlayerSide()
+    {
+        return playerSide;
+    }
+
+    public void setPlayerSide(PlayerSide playerSide)
+    {
+        this.playerSide = playerSide;
+    }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (!(o instanceof MoveTransfer)) return false;
+
+        MoveTransfer that = (MoveTransfer) o;
+
+        if (getnStart() != that.getnStart()) return false;
+        if (getmStart() != that.getmStart()) return false;
+        if (getnDestination() != that.getnDestination()) return false;
+        if (getmDestination() != that.getmDestination()) return false;
+        if (isRightToMove() != that.isRightToMove()) return false;
+        if (getColor() != that.getColor()) return false;
+        if (!getOwnerID().equals(that.getOwnerID())) return false;
+        if (getOrder() != that.getOrder()) return false;
+        return getPlayerSide() == that.getPlayerSide();
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = getnStart();
+        result = 31 * result + getmStart();
+        result = 31 * result + getnDestination();
+        result = 31 * result + getmDestination();
+        result = 31 * result + getColor().hashCode();
+        result = 31 * result + getOwnerID().hashCode();
+        result = 31 * result + getOrder().hashCode();
+        result = 31 * result + (isRightToMove() ? 1 : 0);
+        result = 31 * result + getPlayerSide().hashCode();
+        return result;
+    }
 }
