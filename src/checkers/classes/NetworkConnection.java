@@ -7,16 +7,20 @@ public class NetworkConnection {
 
 
     public NetworkCommProtocolThread networkCommProtocolThread = new NetworkCommProtocolThread();
-
+    public int connectionID ;
 
     public NetworkConnection() {
 
        // networkCommProtocolThread.setSocket(socket);
     }
 
+    public NetworkConnection(int size)
+    {
+        this.connectionID = size;
+    }
 
 
-public void startConnection(Socket socket )
+    public void startConnection(Socket socket )
 {
 
     networkCommProtocolThread.setDaemon(true);
@@ -31,4 +35,20 @@ public void closeConnection()
 
 }
 
+
+    public NetworkCommProtocolThread getNetworkCommProtocolThread() {
+        return networkCommProtocolThread;
+    }
+
+    public void setNetworkCommProtocolThread(NetworkCommProtocolThread networkCommProtocolThread) {
+        this.networkCommProtocolThread = networkCommProtocolThread;
+    }
+
+    public int getConnectionID() {
+        return connectionID;
+    }
+
+    public void setConnectionID(int connectionID) {
+        this.connectionID = connectionID;
+    }
 }

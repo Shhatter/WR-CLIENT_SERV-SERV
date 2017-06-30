@@ -23,6 +23,7 @@ public class NetworkCommProtocolThread extends Thread{
 
 
     public MoveTransfer moveTransfer= new MoveTransfer();
+    public MoveTransfer tempMoveTranfer = new MoveTransfer();
     public Socket socket = null;
     public ObjectOutputStream out;
     public ObjectInputStream in;
@@ -31,7 +32,7 @@ public class NetworkCommProtocolThread extends Thread{
     public NetworkCommProtocolThread()
     {
         this.setDaemon(true);
-        this.setName("GAME THREAD");
+        this.setName("CONNECTION THREAD");
     }
 
     public void sendData(MoveTransferOrder sOrder)
@@ -52,14 +53,13 @@ public class NetworkCommProtocolThread extends Thread{
     {
 
         currentThreadID = Thread.currentThread().getId();
-        System.out.println("Thread ID: "+currentThreadID + " is working");
+        System.out.println("Connection Thread ID: "+currentThreadID + " is working");
 
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
             socket.setTcpNoDelay(true); //może się przyda - może nie.
 
-//            socket.setTcpNoDelay(true); może się przyda - może nie.
 
 
         while (moveTransfer.getOrder()!=MoveTransferOrder.END_OF_GAME)
@@ -70,8 +70,6 @@ public class NetworkCommProtocolThread extends Thread{
                 out.reset();
                 out.writeObject(moveTransfer);
 
-               // out.writeObject("DUPA");
-
 
                 out.flush();
                 newDataToSend = false;
@@ -79,6 +77,26 @@ public class NetworkCommProtocolThread extends Thread{
                 System.out.println("Data from thread " +currentThreadID + " has been sent");
 
 
+            }
+            else if( newDataToSend == false && newDataToReceive == true)
+            {
+                System.out.println("Connection Thread ID: "+currentThreadID + " is waiting for data...");
+                tempMoveTranfer =(MoveTransfer)  in.readObject();
+                System.out.println("Connection Thread ID: "+currentThreadID + " has received something");
+                tempMoveTranfer.showAllData();
+                if(tempMoveTranfer.hashCode()==moveTransfer.hashCode())
+                {
+                    System.out.println("Data are the same !");
+                    throw new IllegalAccessException("NOPE");
+                }
+                else
+                {
+                    moveTransfer = new MoveTransfer(tempMoveTranfer);
+                    this.newDataToReceive = false;
+//                    blockingQueue.put( new MoveTransfer(moveTransfer));
+
+
+                }
             }
 
 
@@ -92,6 +110,10 @@ public class NetworkCommProtocolThread extends Thread{
             e.printStackTrace();
 
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         } finally
         {

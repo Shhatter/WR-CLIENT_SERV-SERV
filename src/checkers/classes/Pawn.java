@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class Pawn {
 
-    PawnColor pColor;
-    boolean boardSide;
-    String position;
-    boolean pawnLocked;
-    boolean pawnKing ; // czy pionek jest damką
+   public  PawnColor pColor = PawnColor.NONE;
+   public  boolean boardSide;
+   public  String position;
+   public  boolean pawnLocked;
+   public  boolean pawnKing ; // czy pionek jest damką
 
-    ArrayList <PawnMoveOption> moveOption;
+   public  ArrayList <PawnMoveOption> moveOption;
 
 
 

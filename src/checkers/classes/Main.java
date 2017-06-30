@@ -23,7 +23,7 @@ public class Main {
         while (gameController.portListening) { // 127.0.0.1:5555 == localhost
 
 
-            gameController.networkConnections.add(new NetworkConnection());
+            gameController.networkConnections.add(new NetworkConnection(gameController.networkConnections.size()));
             gameController.networkConnections.get(gameController.networkConnections.size()-1).startConnection(server.accept());
 
             gameController.threadNumber++;
