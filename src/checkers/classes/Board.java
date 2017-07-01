@@ -11,12 +11,29 @@ import java.util.ArrayList;
   //ArrayList<Pawn> pawnList = new ArrayList<>();
 
   public Pawn [][] pawnList;
+  public ArrayList<PawnMoveOption> pawnMoveOptions = new ArrayList<PawnMoveOption>();
 
 
   public Board(int whitePawnAmmount, int blackPawnAmmount, Pawn[][] pawnList) {
    this.whitePawnAmmount = whitePawnAmmount;
    this.blackPawnAmmount = blackPawnAmmount;
    this.pawnList = pawnList;
+  }
+
+  public Board(Board board) {
+   this.whitePawnAmmount = board.getWhitePawnAmmount();
+   this.blackPawnAmmount = board.getBlackPawnAmmount();
+   this.pawnList = new Pawn[8][8];
+   for (int i = 0 ; i< pawnList.length;i++)
+   {
+    for (int j = 0;j<pawnList[j].length;j++)
+    {
+       pawnList[i][j] = new Pawn (board.getPawnList()[i][j].getPawnColor(),board.getPawnList()[i][j].getPlayerSide(),board.getPawnList()[i][j].isPawnKing(),board.getPawnList()[i][j].isUsedField());
+    }
+
+   }
+
+//   this.pawnMoveOptions = pawnMoveOptions;
   }
 
   public int getWhitePawnAmmount() {

@@ -6,9 +6,10 @@ import checkers.enums.PlayerSide;
 import checkers.enums.ServerStatus;
 
 import java.security.InvalidParameterException;
-import java.security.acl.Owner;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by Praca on 2017-06-25.
@@ -24,9 +25,11 @@ public class gameController extends Thread
     public Board board;
     public PawnColor currentPlayerMove = PawnColor.NONE;
     ArrayList<NetworkConnection> networkConnections = new ArrayList<NetworkConnection>();
+    public BlockingQueue<MoveTransfer> blockingQueue = new LinkedBlockingQueue<MoveTransfer>();;
 
 
-   // public GameSession  gameSession = new int[]{-9999,-9999};
+
+    // public GameSession  gameSession = new int[]{-9999,-9999};
     public ArrayList<GameSession>  gameSession= new ArrayList<GameSession>();
 
 public gameController()
@@ -187,6 +190,7 @@ public void start()
         sendDataToPlayers(serverStatus);
         setupBoard();
 
+
         System.out.println("Initial board setup is done");
         checkAllMoves();
         System.out.println("########################");
@@ -195,21 +199,15 @@ public void start()
         System.out.println("Player move: WHITE");
 
 
-        serverStatus = ServerStatus.WAITING_FOR_DATA_FROM_CLIENTS;
+        serverStatus = ServerStatus.WAITING_FOR_WHITE_MOVE;
     }
 
-    private void checkAllMoves() {
-    }
 
-    private void setupBoard() 
+    private void setupBoard()
     {
+
+        currentPlayerMove = PawnColor.WHITE;
         board = new Board(12,12,new Pawn[8][8]);
-
-
-//
-//        for (int m = 0 ; m< gameSession.length;m++)
-//
-
 
         for (int i =0;i<board.getPawnList().length;i++)
         {
@@ -221,16 +219,250 @@ public void start()
 
         }
 
-        // fill the place for top
 
-        // fill the place for the bottom
+        if(gameSession.get(0).getPlayerSide()==PlayerSide.TOP)
+        {
 
-        // fill the place for the empty
+            board.getPawnList()[0][1].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[0][3].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[0][5].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[0][7].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+
+            board.getPawnList()[1][0].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[1][2].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[1][4].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[1][6].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+
+            board.getPawnList()[2][1].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[2][3].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[2][5].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[2][7].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
 
 
 
+//#####################
+
+
+            board.getPawnList()[5][0].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[5][2].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[5][4].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[5][6].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+
+
+            board.getPawnList()[6][1].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[6][3].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[6][5].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[6][7].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+
+            board.getPawnList()[7][0].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[7][2].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[7][4].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[7][6].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+
+        }
+        else
+        {
+
+            board.getPawnList()[0][1].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[0][3].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[0][5].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[0][7].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+
+            board.getPawnList()[1][0].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[1][2].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[1][4].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[1][6].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+
+            board.getPawnList()[2][1].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[2][3].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[2][5].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+            board.getPawnList()[2][7].setStuff(gameSession.get(1).getPawnColor(),gameSession.get(1).getPlayerSide(),true);
+
+
+            //#####################
+            board.getPawnList()[5][0].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[5][2].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[5][4].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[5][6].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+
+
+            board.getPawnList()[6][1].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[6][3].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[6][5].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[6][7].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+
+            board.getPawnList()[7][0].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[7][2].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[7][4].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+            board.getPawnList()[7][6].setStuff(gameSession.get(0).getPawnColor(),gameSession.get(0).getPlayerSide(),true);
+
+        }
+
+
+
+        for (int i =0;i<board.getPawnList().length;i++)
+        {
+            for (int j =0;j<board.getPawnList()[i].length;j++)
+            {
+                System.out.print(board.getPawnList()[i][j].getPawnColor()+" ");
+            }
+                System.out.println();
+
+        }
 
         
+    }
+
+
+
+    private void checkAllMoves()
+    {
+
+        for (int i =0;i<board.getPawnList().length;i++)
+        {
+            for (int j =0;j<board.getPawnList()[i].length;j++)
+            {
+
+//            board.pawnMoveOptions.addAll();
+
+                if (board.getPawnList()[i][j].getPawnColor()!=PawnColor.NONE) {
+                    possibleMovesFOrPawnm(board.getPawnList()[i][j],board,i,j,-999,-999,0,false);
+                }
+            }
+        }
+    }
+
+    private void possibleMovesFOrPawnm(Pawn pawn, Board board, int tempN, int tempM, int tempBanN, int tempBanM, int cCombo, boolean killmove)
+    {
+        ArrayList<PawnMoveOption> tempMoveOption = new ArrayList<PawnMoveOption>();
+        // czy pionek jest damką ?
+
+        if(pawn.isPawnKing())
+        {
+//            LEFT UP CORNER -1 -1
+
+
+            if (tempN -1>= 0 && tempN -1 <8 && tempM -1 >=0 && tempM -1 <8 )
+            {
+                if (this.board.getPawnList()[tempN -1][tempM -1].getPawnColor() == PawnColor.NONE && this.board.getPawnList()[tempN -1][tempBanM -1].isUsedField() == false)
+                {
+                    tempMoveOption.add(new PawnMoveOption(tempN,tempM,tempN -1 ,tempM -1 ,false,false,0));
+                    possibleMovesFOrPawnm(pawn, new Board(board), --tempN,--tempBanM,-999,-999,0,false);
+                }
+                else if(this.board.getPawnList()[tempN -1][tempM -1].getPawnColor() == pawn.getPawnColor() && this.board.getPawnList()[tempN -1][tempBanM -1].isUsedField() == true)
+                {
+
+                }
+
+
+            }
+
+
+
+
+
+
+//            LEFT DOWN CORNER +1 -1
+            while (++tempN >= 0 && ++tempN<8 && --tempM>=0 && --tempM<8 && pawn.getPawnColor() == PawnColor.NONE && pawn.isUsedField() == false)
+            {
+
+            }
+
+//            RIGHT UP CORNER -1,+1
+            while (--tempN >= 0 && --tempN<8 && ++tempM>=0 && ++tempM<8 && pawn.getPawnColor() == PawnColor.NONE && pawn.isUsedField() == false)
+            {
+
+            }
+
+//            RIGHT DOWN CORNER +1 +1
+            while (++tempN >= 0 && ++tempN<8 && ++tempM>=0 && ++tempM<8 && pawn.getPawnColor() == PawnColor.NONE && pawn.isUsedField() == false)
+            {
+
+            }
+
+        }
+        else  // jeżeli pionek jest zwykłym pionkiem zobaczmy w którym kierunku musi się poruszać
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+        if(pawn.isPawnKing())
+        {
+
+
+
+        }
+        else if(pawn.getPlayerSide()==PlayerSide.BOTTOM)
+        {
+
+        }
+
+        else
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+//            LEFT UP CORNER
+
+        if(--tempN >= 0 && --tempN<8 && --tempM>=0 && --tempM<8)
+        {
+            if(board.getPawnList()[--tempN][--tempM].getPawnColor()== PawnColor.NONE)
+            {
+                tempMoveOption.add(new PawnMoveOption(tempN,tempM,--tempN,--tempM,false,));
+
+            }
+            else if ()
+            {
+
+            }
+        }
+
+//            LEFT DOWN CORNER
+
+
+
+//            RIGHT UP CORNER
+
+
+
+//            RIGHT DOWN CORNER
+*/
+
+
+
+
+
+//        return tempMoveOption;
+    }
+
+    private void countMoveComboPossibilites(ArrayList<PawnMoveOption> tempMoveOption)
+    {
+
+//            LEFT UP CORNER
+//            LEFT DOWN CORNER
+//            RIGHT UP CORNER
+//            RIGHT DOWN CORNER
     }
 
 }
