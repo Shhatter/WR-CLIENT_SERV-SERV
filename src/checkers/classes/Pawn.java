@@ -24,6 +24,14 @@ public class Pawn {
         this.usedField = usedField;
     }
 
+    public Pawn(Pawn movedPawn) {
+        this.playerSide = movedPawn.playerSide;
+        this.pawnKing = movedPawn.pawnKing;
+        this.usedField = movedPawn.usedField;
+        this.pawnColor = movedPawn.pawnColor;
+
+    }
+
     public void setStuff(PawnColor pawnColor, PlayerSide playerSide, boolean usedField)
  {
      this.pawnColor = pawnColor;
@@ -31,6 +39,16 @@ public class Pawn {
      this.usedField = usedField;
 
  }
+    public void clearPawnPlace()
+    {
+        pawnColor = PawnColor.NONE;
+        playerSide = PlayerSide.NOT_DECITED;
+        pawnKing = false;
+        usedField = false;
+
+
+    }
+
 
     public PawnColor getPawnColor() {
         return pawnColor;
