@@ -8,9 +8,7 @@ import java.io.Serializable;
 public enum PawnColor implements Serializable
 
 {
-    BLACK,WHITE,NONE
-
-
+    BLACK, WHITE, NONE
 
 
 }

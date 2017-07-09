@@ -8,5 +8,5 @@ import java.io.Serializable;
 public enum PlayerSide implements Serializable
 
 {
-    TOP,BOTTOM,NOT_DECITED
+    TOP, BOTTOM, NOT_DECITED
 }

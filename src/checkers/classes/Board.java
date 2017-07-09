@@ -19,7 +19,7 @@ class Board extends Thread
     public int cCombo = 0;
     public boolean killMove;
     public static BlockingQueue<PawnMoveOption> blockingQueue = new LinkedBlockingQueue<PawnMoveOption>();
-    ;
+
 
     //ArrayList<Pawn> pawnList = new ArrayList<>();
 

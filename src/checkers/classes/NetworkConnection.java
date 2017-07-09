@@ -3,15 +3,17 @@ package checkers.classes;
 
 import java.net.Socket;
 
-public class NetworkConnection {
+public class NetworkConnection
+{
 
 
     public NetworkCommProtocolThread networkCommProtocolThread = new NetworkCommProtocolThread();
-    public int connectionID ;
+    public int connectionID;
 
-    public NetworkConnection() {
+    public NetworkConnection()
+    {
 
-       // networkCommProtocolThread.setSocket(socket);
+        // networkCommProtocolThread.setSocket(socket);
     }
 
     public NetworkConnection(int size)
@@ -20,35 +22,38 @@ public class NetworkConnection {
     }
 
 
-    public void startConnection(Socket socket )
-{
+    public void startConnection(Socket socket)
+    {
 
-    networkCommProtocolThread.setDaemon(true);
-    networkCommProtocolThread.socket = socket;
-    networkCommProtocolThread.start();
-}
+        networkCommProtocolThread.setDaemon(true);
+        networkCommProtocolThread.socket = socket;
+        networkCommProtocolThread.start();
+    }
 
-public void closeConnection()
-{
-
-
-
-}
+    public void closeConnection()
+    {
 
 
-    public NetworkCommProtocolThread getNetworkCommProtocolThread() {
+    }
+
+
+    public NetworkCommProtocolThread getNetworkCommProtocolThread()
+    {
         return networkCommProtocolThread;
     }
 
-    public void setNetworkCommProtocolThread(NetworkCommProtocolThread networkCommProtocolThread) {
+    public void setNetworkCommProtocolThread(NetworkCommProtocolThread networkCommProtocolThread)
+    {
         this.networkCommProtocolThread = networkCommProtocolThread;
     }
 
-    public int getConnectionID() {
+    public int getConnectionID()
+    {
         return connectionID;
     }
 
-    public void setConnectionID(int connectionID) {
+    public void setConnectionID(int connectionID)
+    {
         this.connectionID = connectionID;
     }
 }

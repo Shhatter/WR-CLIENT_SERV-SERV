@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class MoveTransfer implements Serializable, Cloneable
 {
 
-    int nStart,mStart,nDestination,mDestination;
+    int nStart, mStart, nDestination, mDestination;
     PawnColor color;
     String ownerID;
     MoveTransferOrder order;
@@ -20,7 +20,7 @@ public class MoveTransfer implements Serializable, Cloneable
     PlayerSide playerSide;
 
 
-    public MoveTransfer(int nStart, int mStart,int nDestination,int mDestination, PawnColor color, String ownerID,MoveTransferOrder order,boolean rightToMove,PlayerSide playerSide)
+    public MoveTransfer(int nStart, int mStart, int nDestination, int mDestination, PawnColor color, String ownerID, MoveTransferOrder order, boolean rightToMove, PlayerSide playerSide)
 
     {
         this.nDestination = nDestination;
@@ -81,68 +81,83 @@ public class MoveTransfer implements Serializable, Cloneable
     }
 
 
-
-    public int getnStart() {
+    public int getnStart()
+    {
         return nStart;
     }
 
-    public void setnStart(int nStart) {
+    public void setnStart(int nStart)
+    {
         this.nStart = nStart;
     }
 
-    public int getmStart() {
+    public int getmStart()
+    {
         return mStart;
     }
 
-    public void setmStart(int mStart) {
+    public void setmStart(int mStart)
+    {
         this.mStart = mStart;
     }
 
-    public int getnDestination() {
+    public int getnDestination()
+    {
         return nDestination;
     }
 
-    public void setnDestination(int nDestination) {
+    public void setnDestination(int nDestination)
+    {
         this.nDestination = nDestination;
     }
 
-    public int getmDestination() {
+    public int getmDestination()
+    {
         return mDestination;
     }
 
-    public void setmDestination(int mDestination) {
+    public void setmDestination(int mDestination)
+    {
         this.mDestination = mDestination;
     }
 
-    public PawnColor getColor() {
+    public PawnColor getColor()
+    {
         return color;
     }
 
-    public void setColor(PawnColor color) {
+    public void setColor(PawnColor color)
+    {
         this.color = color;
     }
 
-    public String getOwnerID() {
+    public String getOwnerID()
+    {
         return ownerID;
     }
 
-    public void setOwnerID(String ownerID) {
+    public void setOwnerID(String ownerID)
+    {
         this.ownerID = ownerID;
     }
 
-    public MoveTransferOrder getOrder() {
+    public MoveTransferOrder getOrder()
+    {
         return order;
     }
 
-    public void setOrder(MoveTransferOrder order) {
+    public void setOrder(MoveTransferOrder order)
+    {
         this.order = order;
     }
 
-    public boolean isRightToMove() {
+    public boolean isRightToMove()
+    {
         return rightToMove;
     }
 
-    public void setRightToMove(boolean rightToMove) {
+    public void setRightToMove(boolean rightToMove)
+    {
         this.rightToMove = rightToMove;
     }
 

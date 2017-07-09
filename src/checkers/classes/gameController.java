@@ -14,7 +14,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by Praca on 2017-06-25.
  */
-public class gameController extends Thread {
+public class gameController extends Thread
+{
     public boolean portListening = true;
     public int threadNumber = 0;
     public ServerStatus serverStatus = ServerStatus.INACTIVE;
@@ -48,12 +49,15 @@ public class gameController extends Thread {
         System.out.println("***************************************");
         System.out.println("Game Controller has started it's work !");
         System.out.println("***************************************");
-        while (true) {
-            if (serverStatus == ServerStatus.LOOKINGFORPLAYERS) {
+        while (true)
+        {
+            if (serverStatus == ServerStatus.LOOKINGFORPLAYERS)
+            {
                 System.out.println("Looking for available players");
                 checkFOrAvailablePlayers();
             }
-            if (serverStatus == ServerStatus.FILLTHEBOARD) {
+            if (serverStatus == ServerStatus.FILLTHEBOARD)
+            {
                 System.out.println("Filling up the boards for players");
                 fillTheBoardForPlayers();
 
@@ -69,14 +73,17 @@ public class gameController extends Thread {
         int playersAmount = 0;
 
 
-        for (int i = 0; i < networkConnections.size(); i++) {
-            if (networkConnections.get(i).networkCommProtocolThread.currentThreadID != 0 && networkConnections.get(i).networkCommProtocolThread.activeSession == false) {
+        for (int i = 0; i < networkConnections.size(); i++)
+        {
+            if (networkConnections.get(i).networkCommProtocolThread.currentThreadID != 0 && networkConnections.get(i).networkCommProtocolThread.activeSession == false)
+            {
 
                 gameSession.add(new GameSession(networkConnections.get(i).networkCommProtocolThread.currentThreadID, networkConnections.get(i).connectionID));
                 //gameSession[playersAmount] = i; // identification of networkConnection that participates in game session.
                 playersAmount++;
             }
-            if (playersAmount == 2) {
+            if (playersAmount == 2)
+            {
                 System.out.println("Found 2 players to play the game !");
                 System.out.println("ThreadsID are : " + gameSession.get(0).getThreadID() + " and " + gameSession.get(1).getThreadID());
                 serverStatus = ServerStatus.FILLTHEBOARD;
@@ -87,7 +94,8 @@ public class gameController extends Thread {
 
         }
 
-        if (playersAmount == 0) {
+        if (playersAmount == 0)
+        {
             System.out.println("Not enough players to play the game ");
             throw new InvalidParameterException();
         }
@@ -99,9 +107,12 @@ public class gameController extends Thread {
     public void sendDataToPlayers(ServerStatus serverStatusOrder)
     {
         System.out.println("Prepare data to send to the clients");
-        switch (serverStatusOrder) {
-            case FILLTHEBOARD: {
-                for (int i = 0; i < gameSession.size(); i++) {
+        switch (serverStatusOrder)
+        {
+            case FILLTHEBOARD:
+            {
+                for (int i = 0; i < gameSession.size(); i++)
+                {
                     networkConnections.get(gameSession.get(i).getConnectionID()).networkCommProtocolThread.sendData(MoveTransferOrder.FILL_BOARD,
                             networkConnections.get(gameSession.get(i).getConnectionID()).networkCommProtocolThread.playerSide,
                             networkConnections.get(gameSession.get(i).getConnectionID()).networkCommProtocolThread.pawnColor,
@@ -129,7 +140,8 @@ public class gameController extends Thread {
     }
 
 
-    public void endGame() {
+    public void endGame()
+    {
     }
 
 
@@ -138,14 +150,16 @@ public class gameController extends Thread {
         System.out.println("Prepare to send initial board fill data to the clients !");
         //choose the side for players
         Random generator = new Random();
-        if (generator.nextBoolean() == true) {
+        if (generator.nextBoolean() == true)
+        {
             networkConnections.get(gameSession.get(0).getConnectionID()).networkCommProtocolThread.playerSide = PlayerSide.BOTTOM;
             gameSession.get(0).setPlayerSide(PlayerSide.BOTTOM);
 
             networkConnections.get(gameSession.get(1).getConnectionID()).networkCommProtocolThread.playerSide = PlayerSide.TOP;
             gameSession.get(1).setPlayerSide(PlayerSide.TOP);
         }
-        else {
+        else
+        {
             networkConnections.get(gameSession.get(1).getConnectionID()).networkCommProtocolThread.playerSide = PlayerSide.BOTTOM;
             gameSession.get(1).setPlayerSide(PlayerSide.BOTTOM);
 
@@ -163,7 +177,8 @@ public class gameController extends Thread {
             gameSession.get(1).setAllowedToMove(true);
 
         }
-        else {
+        else
+        {
             networkConnections.get(gameSession.get(1).getConnectionID()).networkCommProtocolThread.pawnColor = PawnColor.BLACK;
             gameSession.get(1).setPawnColor(PawnColor.BLACK);
 
@@ -194,8 +209,10 @@ public class gameController extends Thread {
         currentPlayerMove = PawnColor.WHITE;
         board = new Board(12, 12, new Pawn[8][8]);
 
-        for (int i = 0; i < board.getPawnList().length; i++) {
-            for (int j = 0; j < board.getPawnList()[i].length; j++) {
+        for (int i = 0; i < board.getPawnList().length; i++)
+        {
+            for (int j = 0; j < board.getPawnList()[i].length; j++)
+            {
                 board.getPawnList()[i][j] = new Pawn();
             }
 
@@ -203,7 +220,8 @@ public class gameController extends Thread {
         }
 
 
-        if (gameSession.get(0).getPlayerSide() == PlayerSide.TOP) {
+        if (gameSession.get(0).getPlayerSide() == PlayerSide.TOP)
+        {
 
             board.getPawnList()[0][1].setStuff(gameSession.get(0).getPawnColor(), gameSession.get(0).getPlayerSide(), true);
             board.getPawnList()[0][3].setStuff(gameSession.get(0).getPawnColor(), gameSession.get(0).getPlayerSide(), true);
@@ -241,7 +259,8 @@ public class gameController extends Thread {
             board.getPawnList()[7][6].setStuff(gameSession.get(1).getPawnColor(), gameSession.get(1).getPlayerSide(), true);
 
         }
-        else {
+        else
+        {
 
             board.getPawnList()[0][1].setStuff(gameSession.get(1).getPawnColor(), gameSession.get(1).getPlayerSide(), true);
             board.getPawnList()[0][3].setStuff(gameSession.get(1).getPawnColor(), gameSession.get(1).getPlayerSide(), true);
@@ -279,8 +298,10 @@ public class gameController extends Thread {
         }
 
 
-        for (int i = 0; i < board.getPawnList().length; i++) {
-            for (int j = 0; j < board.getPawnList()[i].length; j++) {
+        for (int i = 0; i < board.getPawnList().length; i++)
+        {
+            for (int j = 0; j < board.getPawnList()[i].length; j++)
+            {
                 System.out.print(board.getPawnList()[i][j].getPawnColor() + " ");
             }
             System.out.println();
@@ -294,8 +315,10 @@ public class gameController extends Thread {
     private void checkAllMoves()
     {
 
-        for (int i = 0; i < board.getPawnList().length; i++) {
-            for (int j = 0; j < board.getPawnList()[i].length; j++) {
+        for (int i = 0; i < board.getPawnList().length; i++)
+        {
+            for (int j = 0; j < board.getPawnList()[i].length; j++)
+            {
 
 //            board.pawnMoveOptions.addAll();
 //
@@ -303,7 +326,8 @@ public class gameController extends Thread {
 //                    possibleMovesFOrPawnm(board.getPawnList()[i][j],board,i,j,-999,-999,0,false);
 //                }
 
-                if (board.getPawnList()[i][j].getPawnColor() != PawnColor.NONE) {
+                if (board.getPawnList()[i][j].getPawnColor() != PawnColor.NONE)
+                {
                     Board temp = new Board(board, i, j);
                     temp.start();
 

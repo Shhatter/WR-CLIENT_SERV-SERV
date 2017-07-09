@@ -6,25 +6,30 @@ import checkers.enums.PlayerSide;
 
 import java.util.ArrayList;
 
-public class Pawn {
+public class Pawn
+{
 
-   private  PawnColor pawnColor = PawnColor.NONE;
-   private  PlayerSide playerSide;
-   private  boolean pawnKing = false; // czy pionek jest damką
-   private  boolean usedField = false;
+    private PawnColor pawnColor = PawnColor.NONE;
+    private PlayerSide playerSide;
+    private boolean pawnKing = false; // czy pionek jest damką
+    private boolean usedField = false;
 //   private  ArrayList <PawnMoveOption> moveOption;
 
 
-    public Pawn(){}
+    public Pawn()
+    {
+    }
 
-    public Pawn(PawnColor pawnColor, PlayerSide playerSide, boolean pawnKing, boolean usedField) {
+    public Pawn(PawnColor pawnColor, PlayerSide playerSide, boolean pawnKing, boolean usedField)
+    {
         this.pawnColor = pawnColor;
         this.playerSide = playerSide;
         this.pawnKing = pawnKing;
         this.usedField = usedField;
     }
 
-    public Pawn(Pawn movedPawn) {
+    public Pawn(Pawn movedPawn)
+    {
         this.playerSide = movedPawn.playerSide;
         this.pawnKing = movedPawn.pawnKing;
         this.usedField = movedPawn.usedField;
@@ -33,12 +38,13 @@ public class Pawn {
     }
 
     public void setStuff(PawnColor pawnColor, PlayerSide playerSide, boolean usedField)
- {
-     this.pawnColor = pawnColor;
-     this.playerSide = playerSide;
-     this.usedField = usedField;
+    {
+        this.pawnColor = pawnColor;
+        this.playerSide = playerSide;
+        this.usedField = usedField;
 
- }
+    }
+
     public void clearPawnPlace()
     {
         pawnColor = PawnColor.NONE;
@@ -50,35 +56,43 @@ public class Pawn {
     }
 
 
-    public PawnColor getPawnColor() {
+    public PawnColor getPawnColor()
+    {
         return pawnColor;
     }
 
-    public void setPawnColor(PawnColor pawnColor) {
+    public void setPawnColor(PawnColor pawnColor)
+    {
         this.pawnColor = pawnColor;
     }
 
-    public PlayerSide getPlayerSide() {
+    public PlayerSide getPlayerSide()
+    {
         return playerSide;
     }
 
-    public void setPlayerSide(PlayerSide playerSide) {
+    public void setPlayerSide(PlayerSide playerSide)
+    {
         this.playerSide = playerSide;
     }
 
-    public boolean isPawnKing() {
+    public boolean isPawnKing()
+    {
         return pawnKing;
     }
 
-    public void setPawnKing(boolean pawnKing) {
+    public void setPawnKing(boolean pawnKing)
+    {
         this.pawnKing = pawnKing;
     }
 
-    public boolean isUsedField() {
+    public boolean isUsedField()
+    {
         return usedField;
     }
 
-    public void setUsedField(boolean usedField) {
+    public void setUsedField(boolean usedField)
+    {
         this.usedField = usedField;
     }
 

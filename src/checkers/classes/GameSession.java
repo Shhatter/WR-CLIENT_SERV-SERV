@@ -17,51 +17,61 @@ public class GameSession
     public PlayerSide playerSide;
     public boolean allowedToMove = false; // Czy aby potrzebne ?
 
-    public GameSession(long threadID, int connectionID) {
+    public GameSession(long threadID, int connectionID)
+    {
         this.threadID = threadID;
         this.connectionID = connectionID;
     }
 
 
-
-    public long getThreadID() {
+    public long getThreadID()
+    {
         return threadID;
     }
 
-    public void setThreadID(long threadID) {
+    public void setThreadID(long threadID)
+    {
         this.threadID = threadID;
     }
 
-    public int getConnectionID() {
+    public int getConnectionID()
+    {
         return connectionID;
     }
 
-    public void setConnectionID(int connectionID) {
+    public void setConnectionID(int connectionID)
+    {
         this.connectionID = connectionID;
     }
 
-    public PawnColor getPawnColor() {
+    public PawnColor getPawnColor()
+    {
         return pawnColor;
     }
 
-    public void setPawnColor(PawnColor pawnColor) {
+    public void setPawnColor(PawnColor pawnColor)
+    {
         this.pawnColor = pawnColor;
     }
 
-    public PlayerSide getPlayerSide() {
+    public PlayerSide getPlayerSide()
+    {
         return playerSide;
     }
 
-    public void setPlayerSide(PlayerSide playerSide) {
+    public void setPlayerSide(PlayerSide playerSide)
+    {
         this.playerSide = playerSide;
     }
 
 
-    public boolean isAllowedToMove() {
+    public boolean isAllowedToMove()
+    {
         return allowedToMove;
     }
 
-    public void setAllowedToMove(boolean allowedToMove) {
+    public void setAllowedToMove(boolean allowedToMove)
+    {
         this.allowedToMove = allowedToMove;
     }
 }
